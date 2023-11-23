@@ -24,7 +24,7 @@ setup(
     description="8-bit optimizers and matrix multiplication routines.",
     license="MIT",
     keywords="gpu optimizers optimization 8-bit quantization compression",
-    url="https://github.com/TimDettmers/bitsandbytes",
+    url="https://github.com/st1vms/bitsandbytes-rocm-gfx1100",
     packages=find_packages(),
     entry_points={
         "console_scripts": ["debug_cuda = bitsandbytes.debug_cli:cli"],

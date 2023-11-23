@@ -13,7 +13,7 @@ class CUDASetup(object):
 
     def generate_instructions(self):
         self.add_log_entry('CUDA SETUP: Something unexpected happened. Please compile from source:')
-        self.add_log_entry('git clone git@github.com:TimDettmers/bitsandbytes.git')
+        self.add_log_entry('git clone git@github.com:st1vms/bitsandbytes-rocm-gfx1100.git')
         self.add_log_entry('cd bitsandbytes')
         self.add_log_entry("<make_cmd here, commented out>")
         self.add_log_entry('python setup.py install')
@@ -67,7 +67,7 @@ try:
         raise RuntimeError('''
         CUDA Setup failed despite GPU being available. Inspect the CUDA SETUP outputs aboveto fix your environment!
         If you cannot find any issues and suspect a bug, please open an issue with detals about your environment:
-        https://github.com/TimDettmers/bitsandbytes/issues''')
+        https://github.com/st1vms/bitsandbytes-rocm-gfx1100/issues''')
     lib.cadam32bit_g32
     lib.get_context.restype = ct.c_void_p
     lib.get_cusparse.restype = ct.c_void_p
