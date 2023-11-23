@@ -13,7 +13,7 @@ Resources:
 
 Requirements: 
 
-- Linux distribution (Ubuntu, MacOS, etc.) + CUDA >= 10.0. LLM.int8() requires Turing or Ampere GPUs.
+- Linux distribution (Ubuntu, MacOS, etc.) + `RDNA3` AMD GPU with latest ROCM/HIP drivers installed.
 - python torch packages (ROCM version)
 
 To compile from source, please follow the [compile_from_source.md](compile_from_source.md) instructions.
