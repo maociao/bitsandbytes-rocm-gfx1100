@@ -9,8 +9,6 @@ Resources:
 
 - [LLM.int8() Paper](https://arxiv.org/abs/2208.07339) -- [LLM.int8() Software Blog Post](https://huggingface.co/blog/hf-bitsandbytes-integration) -- [LLM.int8() Emergent Features Blog Post](https://timdettmers.com/2022/08/17/llm-int8-and-emergent-features/)
 
-## Requirements
-
 ## Installation | Compile from source
 
 Requirements: 
