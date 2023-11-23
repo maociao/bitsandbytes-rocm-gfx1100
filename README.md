@@ -9,19 +9,23 @@ Resources:
 
 - [LLM.int8() Paper](https://arxiv.org/abs/2208.07339) -- [LLM.int8() Software Blog Post](https://huggingface.co/blog/hf-bitsandbytes-integration) -- [LLM.int8() Emergent Features Blog Post](https://timdettmers.com/2022/08/17/llm-int8-and-emergent-features/)
 
-## TL;DR
-**Requirements**
-Linux distribution (Ubuntu, MacOS, etc.) + CUDA >= 10.0. LLM.int8() requires Turing or Ampere GPUs.
-**Installation**:
-``pip install bitsandbytes``
+## Requirements
 
-**Using 8-bit optimizer**:
+## Installation | Compile from source
+
+Requirements: 
+
+- Linux distribution (Ubuntu, MacOS, etc.) + CUDA >= 10.0. LLM.int8() requires Turing or Ampere GPUs.
+- python torch packages (ROCM version)
+
+To compile from source, please follow the [compile_from_source.md](compile_from_source.md) instructions.
+
+### Using 8-bit optimizer:
 1. Comment out optimizer: ``#torch.optim.Adam(....)``
 2. Add 8-bit optimizer of your choice ``bnb.optim.Adam8bit(....)`` (arguments stay the same)
 3. Replace embedding layer if necessary: ``torch.nn.Embedding(..) -> bnb.nn.Embedding(..)``
 
-
-**Using 8-bit Inference**:
+### Using 8-bit Inference:
 1. Comment out torch.nn.Linear: ``#linear = torch.nn.Linear(...)``
 2. Add bnb 8-bit linear light module: ``linear = bnb.nn.Linear8bitLt(...)`` (base arguments stay the same)
 3. There are two modes:
@@ -44,19 +48,6 @@ out = linear(x.to(torch.float16))
 - 8-bit quantization: Quantile, Linear, and Dynamic quantization
 - Fast quantile estimation: Up to 100x faster than other algorithms
 
-## Requirements & Installation
-
-Requirements: anaconda, cudatoolkit, pytorch
-
-Hardware requirements: 
- - LLM.int8(): NVIDIA Turing (RTX 20xx; T4) or Ampere GPU (RTX 30xx; A4-A100); (a GPU from 2018 or older).
- - 8-bit optimizers and quantization: NVIDIA Maxwell GPU or newer (>=GTX 9XX).
-
-Supported CUDA versions: 10.2 - 11.7
-
-The bitsandbytes library is currently only supported on Linux distributions. Windows is not supported at the moment.
-
-The requirements can best be fulfilled by installing pytorch via anaconda. You can install PyTorch by following the ["Get Started"](https://pytorch.org/get-started/locally/) instructions on the official website.
 
 ## Using bitsandbytes
 
@@ -106,10 +97,6 @@ For upcoming features and changes and full history see [Patch Notes](CHANGELOG.m
 
 1. RuntimeError: CUDA error: no kernel image is available for execution on the device. [Solution](errors_and_solutions.md#No-kernel-image-available)
 2. __fatbinwrap_.. [Solution](errors_and_solutions.md#fatbinwrap_)
-
-## Compile from source
-
-To compile from source, please follow the [compile_from_source.md](compile_from_source.md) instructions.
 
 ## License
 
