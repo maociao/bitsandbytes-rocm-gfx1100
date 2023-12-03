@@ -1,6 +1,6 @@
 MKFILE_PATH := $(abspath $(lastword $(MAKEFILE_LIST)))
 ROOT_DIR := $(patsubst %/,%,$(dir $(MKFILE_PATH)))
-
+CUDA_VERSION:=gfx1100
 GPP:= /usr/bin/g++
 ifeq ($(CUDA_HOME),)
 	CUDA_HOME:= $(shell which nvcc | rev | cut -d'/' -f3- | rev)
@@ -100,7 +100,7 @@ cpuonly: $(BUILD_DIR) env
 
 
 HIP_INCLUDE := -I $(ROOT_DIR)/csrc -I $(ROOT_DIR)/include
-HIP_LIB := -L/opt/rocm/lib -L/opt/rocm/llvm/bin/../lib/clang/17.0.0/lib/linux -L/usr/lib/gcc/x86_64-linux-gnu/12 -L/usr/lib/gcc/x86_64-linux-gnu/12/../../../../lib64 -L/lib/x86_64-linux-gnu -L/lib/../lib64 -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib64 -L/lib -L/usr/lib -lgcc_s -lgcc -lpthread -lm -lrt -lamdhip64 -lhipblas -lhipsparse -lclang_rt.builtins-x86_64 -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc
+HIP_LIB := -L/opt/rocm/lib -L/opt/rocm/llvm/bin/../lib/clang/16.0.0/lib/linux -L/usr/lib/gcc/x86_64-linux-gnu/12 -L/usr/lib/gcc/x86_64-linux-gnu/12/../../../../lib64 -L/lib/x86_64-linux-gnu -L/lib/../lib64 -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib64 -L/lib -L/usr/lib -lgcc_s -lgcc -lpthread -lm -lrt -lamdhip64 -lhipblas -lhipsparse -lclang_rt.builtins-x86_64 -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc
 hip: $(BUILD_DIR)
 	/usr/bin/hipcc -std=c++17 -c -fPIC --amdgpu-target=gfx1100 $(HIP_INCLUDE) -o $(BUILD_DIR)/ops.o -D NO_CUBLASLT $(CSRC)/ops.cu
 	/usr/bin/hipcc -std=c++17 -c -fPIC --amdgpu-target=gfx1100 $(HIP_INCLUDE) -o $(BUILD_DIR)/kernels.o -D NO_CUBLASLT $(CSRC)/kernels.cu
